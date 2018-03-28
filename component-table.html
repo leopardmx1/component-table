@@ -1,0 +1,55 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+<link rel="import" href="../../../bower_components/vaadin-grid/vaadin-grid.html">
+
+<dom-module id="component-table">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <iron-ajax auto url="http://35.226.51.178/api/mcontrol/servicios/consultaCestaTareas" handle-as="json" last-response="{{tareas}}"
+    ></iron-ajax>
+
+    <vaadin-grid items="[[tareas.cesta]]">
+      <vaadin-grid-selection-column auto-select></vaadin-grid-selection-column>
+      <vaadin-grid-column width="5em">
+        <template class="header">
+          <vaadin-grid-sorter path="banca">Banca</vaadin-grid-sorter>
+        </template>
+        <template>[[item.descBanca]]</template>
+      </vaadin-grid-column>
+      <vaadin-grid-column width="5em">
+        <template class="header">
+          <vaadin-grid-sorter path="tipsolicitud">Tipo de Solicitud</vaadin-grid-sorter>
+        </template>
+        <template>[[item.descTipoSolicitud]]</template>
+      </vaadin-grid-column>
+      <vaadin-grid-column width="5em">
+        <template class="header">
+          <vaadin-grid-sorter path="dateAlta">Fecha de Alta</vaadin-grid-sorter>
+        </template>
+        <template>[[item.descTipoSolicitud]]</template>
+      </vaadin-grid-column>
+
+    </vaadin-grid>
+
+  </template>
+
+  <script>
+    /**
+     * `component-table`
+     * Componente Tabla de Mesas
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class ComponentTable extends Polymer.Element {
+      static get is() { return 'component-table'; }
+    }
+
+    window.customElements.define(ComponentTable.is, ComponentTable);
+  </script>
+</dom-module>
